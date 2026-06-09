@@ -1,0 +1,38 @@
+# --- Raw data (too large, not committed) ---
+data/raw/*.csv
+
+# --- Secrets ---
+.env
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# --- Power BI ---
+*.pbix.bak
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+
+# --- Docker ---
+postgres_data/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Internal notes (not for public repo) ---
+PLAN.md
+
+# --- Claude / AI assistant files ---
+.claude/
+CLAUDE.md
+.aider*
+.cursor/
