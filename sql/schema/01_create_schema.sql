@@ -109,3 +109,20 @@ CREATE TABLE order_payments (
 
 CREATE INDEX idx_order_payments_type ON order_payments(payment_type);
 -- No extra index for order_id — it's the leftmost column of the composite PK.
+
+-- Grain: one row = one line item in an order.
+-- Money lives here: order value = SUM(price + freight_value) over items.
+CREATE TABLE order_items (
+    order_id            VARCHAR(32)    NOT NULL REFERENCES orders(order_id),
+    order_item_id       SMALLINT       NOT NULL,
+    product_id          VARCHAR(32)    NOT NULL REFERENCES products(product_id),
+    seller_id           VARCHAR(32)    NOT NULL REFERENCES sellers(seller_id),
+    shipping_limit_date TIMESTAMPTZ    NOT NULL,
+    price               DECIMAL(10,2)  NOT NULL CHECK (price >= 0),
+    freight_value       DECIMAL(10,2)  NOT NULL CHECK (freight_value >= 0),
+    PRIMARY KEY (order_id, order_item_id)
+);
+
+CREATE INDEX idx_order_items_product_id ON order_items(product_id);
+CREATE INDEX idx_order_items_seller_id  ON order_items(seller_id);
+-- order_id has an index via the composite PK (leftmost prefix rule).
