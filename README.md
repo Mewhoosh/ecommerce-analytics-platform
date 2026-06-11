@@ -2,7 +2,8 @@
 
 End-to-end analytics project on the **Brazilian E-Commerce (Olist)** dataset — from raw CSVs to a Power BI dashboard, with a relational data model, Python ETL, and analytical SQL in between.
 
-> **OVERVIEW**
+<img width="1320" height="740" alt="obraz" src="https://github.com/user-attachments/assets/95fd70a2-7735-40d1-81b4-582e25f3b843" />
+
 
 ---
 
@@ -28,7 +29,7 @@ End-to-end analytics project on the **Brazilian E-Commerce (Olist)** dataset —
 
 ```
  CSV (Kaggle)  ──►  Python loader  ──►  PostgreSQL  ──►  Views  ──►  Power BI
-                    (pandas,             (8 tables,      (4 views    (2-page
+                    (pandas,             (8 tables,      (8 views    (4-page
                      validation)         FKs, indexes)    for BI)     dashboard)
 ```
 
@@ -50,25 +51,29 @@ Findings surfaced by the SQL/BI layer:
 
 ### Executive Overview
 
-> **OVERVIEW**
+<img width="1320" height="740" alt="obraz" src="https://github.com/user-attachments/assets/2e908de2-fa7d-4ab1-bfd8-2e45378ecdb2" />
+
 
 KPI snapshot, monthly revenue trend, worst-performing delivery states, customer segment distribution, and revenue concentration by state.
 
 ### Customer Analytics
 
-> **CUSTOMERS**
+<img width="1308" height="729" alt="obraz" src="https://github.com/user-attachments/assets/a5d71412-d164-4799-b9cc-4b70b6584646" />
+
 
 Segment-level deep dive: customer counts and average CLV per segment, top spenders table, and CLV distribution (whales filtered for readability).
 
 ### Products & Categories
 
-> **PRODUCTS**
+<img width="1312" height="735" alt="obraz" src="https://github.com/user-attachments/assets/bb0b1de1-5dd4-4432-8cb3-a9ea4a39fdc1" />
+
 
 Category treemap, top categories by revenue and by average item value — surfaces both volume leaders (health_beauty, watches_gifts) and high-ticket niches (computers).
 
 ### Operations & Logistics
 
-> **OPERATIONS**
+<img width="1308" height="730" alt="obraz" src="https://github.com/user-attachments/assets/9a5ca24a-fee5-4c35-9ae7-dbba44556d87" />
+
 
 Delivery time histogram, on-time delivery trend over time, payment method breakdown (incl. Brazilian boleto), and top sellers table.
 
