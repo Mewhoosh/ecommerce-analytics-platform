@@ -90,7 +90,8 @@ Predictive layer added on top of the analytics platform. Forecasts daily revenue
 | LightGBM | 6375.25 | 22.21 |
 | **XGBoost** | **6060.08** | **22.23** |
 
-> **FORECAST_COMPARISON**
+<img width="1289" height="490" alt="obraz" src="https://github.com/user-attachments/assets/74aa5613-9012-45f4-a8b9-1dbff6baf9e7" />
+
 
 Tree models beat seasonal naive by ~22% on MAE and Prophet by ~17%. The gain comes from features the statistical models had no access to: lag-7, lag-28, rolling means, and a Black Friday flag. LightGBM and XGBoost land within ~5% of each other - the choice between them is taste, the feature pipeline is what drives the win.
 
