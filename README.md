@@ -14,6 +14,7 @@ End-to-end analytics project on the **Brazilian E-Commerce (Olist)** dataset —
 - **8 analytical SQL queries** covering revenue trends, customer LTV, RFM segmentation, delivery KPIs, and cohort retention
 - **8 reporting views** that pre-aggregate logic for the BI layer
 - **Power BI dashboard** with four pages: Executive Overview, Customer Analytics, Products & Categories, Operations & Logistics
+- **Time series forecasting layer** comparing naive baselines, Prophet, LightGBM and XGBoost on daily revenue (see [`forecasting/`](forecasting/))
 
 ## Tech stack
 
@@ -77,6 +78,24 @@ Category treemap, top categories by revenue and by average item value — surfac
 
 Delivery time histogram, on-time delivery trend over time, payment method breakdown (incl. Brazilian boleto), and top sellers table.
 
+## Forecasting
+
+Predictive layer added on top of the analytics platform. Forecasts daily revenue 60 days out and compares five approaches: two naive baselines, Prophet, LightGBM and XGBoost with engineered lag and calendar features.
+
+| Model | MAE | MAPE % |
+|---|---|---|
+| Naive | 10063.59 | 28.79 |
+| Seasonal naive | 7797.61 | 23.83 |
+| Prophet | 7677.04 | 27.32 |
+| LightGBM | 6375.25 | 22.21 |
+| **XGBoost** | **6060.08** | **22.23** |
+
+> **FORECAST_COMPARISON**
+
+Tree models beat seasonal naive by ~22% on MAE and Prophet by ~17%. The gain comes from features the statistical models had no access to: lag-7, lag-28, rolling means, and a Black Friday flag. LightGBM and XGBoost land within ~5% of each other - the choice between them is taste, the feature pipeline is what drives the win.
+
+Full walkthrough with EDA, STL decomposition, feature importance, and limitations: [`forecasting/README.md`](forecasting/README.md).
+
 ## How to run
 
 ### Prerequisites
@@ -134,6 +153,10 @@ ecommerce-analytics-platform/
 │       └── 08_cohort_retention.sql
 ├── powerbi/
 │   └── dashboard.pbix              # Four-page Power BI report
+├── forecasting/
+│   ├── 01_revenue_forecast.ipynb   # daily revenue forecast (Prophet, LightGBM, XGBoost)
+│   ├── data/daily_revenue.csv      # aggregated daily series for the notebook
+│   └── README.md                   # detailed methodology and results
 ├── requirements.txt
 └── README.md
 ```
