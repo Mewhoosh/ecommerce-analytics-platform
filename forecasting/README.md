@@ -24,7 +24,8 @@ Daily aggregation gives ~600 points spanning two years, exposes weekly seasonali
 - Trimmed truncated tail: dropped everything after 2018-08-21 (later days have incomplete `delivered` status due to the snapshot cutoff; Olist median delivery is ~12 days, so the trail of incomplete days extends ~2 weeks back).
 - Final cleaned series: 568 days, 2017-01-31 to 2018-08-21.
 
-> **CLEANED_SERIES**
+<img width="1186" height="390" alt="obraz" src="https://github.com/user-attachments/assets/62c45cce-af4c-4da1-a3b6-c306da010999" />
+
 
 ## Seasonality
 
@@ -36,7 +37,8 @@ STL decomposition (weekly period = 7) confirms three structural components:
 
 Day-of-week confirms the cycle: Mon-Thu noticeably higher than Sat-Sun. Classic B2C e-commerce pattern.
 
-> **STL**
+<img width="1189" height="801" alt="obraz" src="https://github.com/user-attachments/assets/10a64a40-b2fc-4cf3-a3ee-9b54e6dcad0a" />
+
 
 ## Train/test split
 
@@ -59,11 +61,13 @@ Tree-based models win by a clear margin. LightGBM and XGBoost land within ~5% of
 
 Prophet barely improves on seasonal naive. SARIMA was tested in an earlier iteration and underperformed seasonal naive, so it was dropped. Together this confirms that on a series this short with this much weekly seasonality, sophistication without good features adds nothing - the win comes from engineered lags and the holiday flag.
 
-> **FORECAST_COMPARISON**
+<img width="1289" height="490" alt="obraz" src="https://github.com/user-attachments/assets/1fc030dc-a60e-437f-94f9-6de6b83eff34" />
+
 
 ## Feature importance
 
-> **FEATURE_IMPORTANCE**
+<img width="790" height="390" alt="obraz" src="https://github.com/user-attachments/assets/e91fc7a0-c73b-478c-bbb3-7275c59b417c" />
+
 
 `is_bf` tops the gain ranking, but only because the four Black Friday days carry an extreme target jump in training. The flag is always 0 in the test window, so on the held-out forecast the working features are really `roll_7`, `dow`, and the lag terms (`lag_1`, `lag_7`, `lag_28`). This is a known gotcha with gain-based importance on rare-event features - high gain on training does not imply high contribution at inference time when the feature is dormant.
 
